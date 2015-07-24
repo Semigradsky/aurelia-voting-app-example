@@ -1,0 +1,40 @@
+{
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "binaryLiterals": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "modules": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "octalLiterals": true,
+    "restParams": true,
+    "spread": true,
+    "superInFunctions": true,
+    "templateStrings": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    // Best Practices
+    "default-case": 2,
+    "no-new": 0,
+    "no-unused-expressions": 0,
+    "radix": 2,
+    // Stylistic Issues
+    "quotes": [2, "single", "avoid-escape"],
+    // ECMAScript 6
+    "constructor-super": 2,
+    "generator-star-spacing": [2, "after"],
+    "no-this-before-super": 2,
+    "no-var": 2,
+    "object-shorthand": 2,
+    "prefer-const": 2
+  }
+}

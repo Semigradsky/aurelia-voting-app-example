@@ -1,0 +1,41 @@
+{
+  "name": "aurelia-voting-app-example",
+  "version": "0.0.0",
+  "description": "Aurelia voting app example",
+  "main": "index.js",
+  "scripts": {
+    "init": "npm install && jspm install",
+    "start": "babel-node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Semigradsky/aurelia-voting-app-example.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Semigradsky/aurelia-voting-app-example/issues"
+  },
+  "homepage": "https://github.com/Semigradsky/aurelia-voting-app-example",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "eslint": "^0.24.1",
+    "express": "^4.13.1",
+    "morgan": "^1.6.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.3",
+    "eslint": "^0.24.1",
+    "jspm": "^0.15.7"
+  },
+  "jspm": {
+    "directories": {},
+    "dependencies": {},
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
+    }
+  }
+}
