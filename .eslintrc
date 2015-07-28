@@ -19,7 +19,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
   "rules": {
     // Best Practices
@@ -27,6 +28,8 @@
     "no-new": 0,
     "no-unused-expressions": 0,
     "radix": 2,
+    // Node.js
+    "handle-callback-err": 1,
     // Stylistic Issues
     "quotes": [2, "single", "avoid-escape"],
     // ECMAScript 6

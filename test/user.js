@@ -4,13 +4,11 @@ import Account from '../models/account.js';
 
 should();
 
-let db;
-
 describe('Account', () => {
   const username = '12345';
 
   before((done) => {
-    db = mongoose.connect('mongodb://localhost/test');
+    mongoose.connect('mongodb://localhost/test');
     done();
   });
 
@@ -21,7 +19,7 @@ describe('Account', () => {
 
   beforeEach((done) => {
     const account = new Account({
-      username: username,
+      username,
       password: 'testy'
     });
 

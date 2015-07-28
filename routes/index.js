@@ -2,44 +2,36 @@ import { Router } from 'express';
 import passport from 'passport';
 import Account from '../models/account';
 
-const router = Router();
+const router = new Router();
 
-router.get('/', (req, res) => {
-  res.render('index', { user : req.user });
-});
-
-router.get('/register', (req, res) => {
-  res.render('register', { });
+router.get('/user', (req, res) => {
+  res.json({ user: req.user });
 });
 
 router.post('/register', (req, res) => {
-  const newUser = new Account({ username : req.body.username });
-  Account.register(newUser, req.body.password, (err, account) => {
+  const newUser = new Account({ username: req.body.username });
+  Account.register(newUser, req.body.password, (err) => {
     if (err) {
-      return res.render('register', { account : account });
+      return res.json({ fail: err });
     }
 
     passport.authenticate('local')(req, res, () => {
-      res.redirect('/');
+      res.json({ ok: 'good' });
     });
   });
 });
 
-router.get('/login', (req, res) => {
-  res.render('login', { user : req.user });
-});
-
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect('/');
+  res.json({ ok: 'good' });
 });
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.json({ ok: 'good' });
 });
 
 router.get('/ping', (req, res) => {
-    res.status(200).send("pong!");
+    res.status(200).send('pong!');
 });
 
 module.exports = router;
