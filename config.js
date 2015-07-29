@@ -17,6 +17,8 @@ System.config({
 System.config({
   "map": {
     "aurelia-bootstrapper": "github:aurelia/bootstrapper@0.14.0",
+    "aurelia-http-client": "github:aurelia/http-client@0.10.0",
+    "aurelia-validation": "github:aurelia/validation@0.2.7",
     "babel": "npm:babel-core@5.8.3",
     "babel-runtime": "npm:babel-runtime@5.8.3",
     "bootstrap": "github:twbs/bootstrap@3.3.5",
@@ -64,6 +66,10 @@ System.config({
     },
     "github:aurelia/history-browser@0.6.1": {
       "aurelia-history": "github:aurelia/history@0.6.0",
+      "core-js": "npm:core-js@0.9.18"
+    },
+    "github:aurelia/http-client@0.10.0": {
+      "aurelia-path": "github:aurelia/path@0.8.0",
       "core-js": "npm:core-js@0.9.18"
     },
     "github:aurelia/loader-default@0.9.0": {
@@ -122,6 +128,11 @@ System.config({
       "aurelia-path": "github:aurelia/path@0.8.0",
       "aurelia-task-queue": "github:aurelia/task-queue@0.6.0",
       "core-js": "npm:core-js@0.9.18"
+    },
+    "github:aurelia/validation@0.2.7": {
+      "aurelia-binding": "github:aurelia/binding@0.8.2",
+      "aurelia-dependency-injection": "github:aurelia/dependency-injection@0.9.0",
+      "aurelia-templating": "github:aurelia/templating@0.13.11"
     },
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"
