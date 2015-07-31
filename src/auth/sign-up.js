@@ -1,29 +1,27 @@
-import { inject, All } from 'aurelia-framework';
+import { inject } from 'aurelia-framework';
 import { Validation, ensure } from 'aurelia-validation';
-import { HttpClient } from 'aurelia-http-client';
+import { AuthService } from 'auth/authService';
 
-@inject(Validation, HttpClient)
+@inject(Validation, AuthService)
 export class SignUp {
 
   @ensure(it => it.isNotEmpty())
-  username='';
+  username = '';
 
   @ensure(it => it.isNotEmpty().hasMinLength(6))
-  password='';
+  password = '';
 
-  constructor(validation, http) {
+  constructor(validation, authService) {
     this.validation = validation.on(this);
-    this.http = http;
+    this.authService = authService;
   }
 
   signup() {
     this.validation.validate().then(() => {
 
-      this.http.post('http://localhost:3000/register', { username: this.username, password: this.password })
-        .then(() => { alert('Welcome!'); })
-        .catch(httpResponse => {
-          alert(httpResponse.response);
-        });
+      this.authService.signUp(this.username, this.password)
+        .then(() => alert('Welcome!'))
+        .catch(reason => alert(reason));
 
     }).catch(() => {});
   }

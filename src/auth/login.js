@@ -1,35 +1,30 @@
-import { inject, All, FormData } from 'aurelia-framework';
+import { inject } from 'aurelia-framework';
 import { Validation, ensure } from 'aurelia-validation';
-import { HttpClient } from 'aurelia-http-client';
+import { AuthService } from 'auth/authService';
 
-@inject(Validation, HttpClient)
+@inject(Validation, AuthService)
 export class Login {
 
   @ensure(it => it.isNotEmpty())
-  username='';
+  username = '';
 
   @ensure(it => it.isNotEmpty().hasMinLength(6))
-  password='';
+  password = '';
 
-  constructor(validation, http) {
+  constructor(validation, authService) {
     this.validation = validation.on(this);
-    this.http = http;
+    this.authService = authService;
   }
 
   login() {
     this.validation.validate().then(() => {
 
-      this.http.post('http://localhost:3000/login', { username: this.username, password: this.password })
-        .then(() => {
+      this.authService.login(this.username, this.password)
+        .then((response) => {
+          console.log(response.user);
           alert('Welcome!');
          })
-        .catch(httpResponse => {
-          if (httpResponse.statusCode === 401) {
-            return alert('Please check login and password');
-          }
-
-          alert(httpResponse.response);
-        });
+        .catch(reason => alert(reason));
 
     }).catch(() => {});
   }

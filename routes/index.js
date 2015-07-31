@@ -8,6 +8,18 @@ router.get('/user', (req, res) => {
   res.json({ user: req.user });
 });
 
+router.get('/polls', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) { return next(err); }
+
+    console.log(user);
+    console.log(info);
+    const polls = [ { id: 1, title: 'Poll 1' }, { id: 1, title: 'Poll 2' } ];
+    res.json({ polls });
+
+  })(req, res, next);
+});
+
 router.post('/register', (req, res) => {
   const newUser = new Account({ username: req.body.username });
   Account.register(newUser, req.body.password, (err) => {
@@ -23,7 +35,8 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.json({ ok: 'good' });
+  const user = { username: req.user.username };
+  res.json({ user });
 });
 
 router.get('/logout', (req, res) => {

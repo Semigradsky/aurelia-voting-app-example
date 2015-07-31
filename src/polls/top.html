@@ -1,0 +1,6 @@
+<template>
+  <h2>Top Polls</h2>
+  <ul>
+    <li repeat.for="poll of polls" data-id.bind="poll.id">${poll.title}</li>
+  </ul>
+</template>
