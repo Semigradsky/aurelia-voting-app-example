@@ -2,8 +2,7 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
+
 import mongoose from 'mongoose';
 import passport from 'passport';
 import { Strategy } from 'passport-local';
@@ -15,19 +14,14 @@ import Account from './models/account';
 const app = express();
 
 app.set('port', process.env.PORT || 3000);
-
 app.use(logger('dev'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-}));
+
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
   next();
 });
 app.use(passport.initialize());

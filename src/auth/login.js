@@ -21,7 +21,7 @@ export class Login {
 
       this.authService.login(this.username, this.password)
         .then((response) => {
-          console.log(response.user);
+          console.log(response);
           alert('Welcome!');
          })
         .catch(reason => alert(reason));

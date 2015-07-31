@@ -1,5 +1,4 @@
 import { inject } from 'aurelia-framework';
-import { HttpClient } from 'aurelia-http-client';
 import { PollsService } from 'polls/pollsService';
 
 @inject(PollsService)

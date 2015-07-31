@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import passport from 'passport';
 import Account from '../models/account';
+import expressJwt from 'express-jwt';
+import jwt from 'jsonwebtoken';
 
 const router = new Router();
 
@@ -8,16 +10,14 @@ router.get('/user', (req, res) => {
   res.json({ user: req.user });
 });
 
-router.get('/polls', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) { return next(err); }
+router.get('/polls', expressJwt({ secret: 'very secret key' }), (req, res) => {
+  const polls = [ { id: 1, title: 'Poll 1' }, { id: 2, title: 'Poll 2' } ];
 
-    console.log(user);
-    console.log(info);
-    const polls = [ { id: 1, title: 'Poll 1' }, { id: 1, title: 'Poll 2' } ];
-    res.json({ polls });
+  if (req.user) {
+    polls.push({ id: 3, title: 'Your poll' });
+  }
 
-  })(req, res, next);
+  res.json({ polls });
 });
 
 router.post('/register', (req, res) => {
@@ -36,7 +36,8 @@ router.post('/register', (req, res) => {
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
   const user = { username: req.user.username };
-  res.json({ user });
+  const token = jwt.sign({ username: req.user.username }, 'very secret key', { expiresInMinutes: 60 * 5 });
+  res.json({ user, token });
 });
 
 router.get('/logout', (req, res) => {

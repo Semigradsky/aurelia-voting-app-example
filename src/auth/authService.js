@@ -5,14 +5,26 @@ import { HttpClient } from 'aurelia-http-client';
 export class AuthService {
 
   constructor(http) {
-    this.http = http;
+    this.http = http.configure(x => {
+      x.withBaseUrl('http://localhost:3000');
+    });
+  }
+
+  set token(value) {
+    localStorage.setItem('token', value);
+  }
+
+  get token() {
+    return localStorage.getItem('token');
   }
 
   login(username, password) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:3000/login', { username, password })
+      this.http.post('login', { username, password })
         .then((httpResponse) => {
-            resolve(JSON.parse(httpResponse.response));
+            const response = JSON.parse(httpResponse.response);
+            this.token = response.token;
+            resolve(response.user);
            })
           .catch(httpResponse => {
             if (httpResponse.statusCode === 401) {
@@ -25,7 +37,7 @@ export class AuthService {
 
   signUp(username, password) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:3000/register', { username, password })
+      this.http.post('register', { username, password })
         .then(resolve)
         .catch(httpResponse => reject(httpResponse.response));
     });

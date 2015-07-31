@@ -4,7 +4,11 @@
     <div class="col-md-6">
       <h2 class="text-center">Sign up</h2>
 
-      <form role="form" submit.delegate="signup()" validate.bind="validation">
+      <form role="form" submit.delegate="signup()" validate.bind="validation" autocomplete="off">
+        <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+          <input style="display:none" type="text" name="fakeusernameremembered"/>
+          <input style="display:none" type="password" name="fakepasswordremembered"/>
+        <!-- -->
         <div class="form-group">
           <label for="username">Login</label>
           <input type="text" value.bind="username" class="form-control" id="username" autofocus>

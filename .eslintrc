@@ -16,6 +16,7 @@
     "superInFunctions": true,
     "templateStrings": true
   },
+  "parser": "Babel-ESLint",
   "env": {
     "browser": true,
     "node": true,
