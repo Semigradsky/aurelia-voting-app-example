@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-
+import expressJwt from 'express-jwt';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import { Strategy } from 'passport-local';
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(expressJwt({ secret: 'very secret key', credentialsRequired: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

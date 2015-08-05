@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
 import Account from '../models/account';
-import expressJwt from 'express-jwt';
 import jwt from 'jsonwebtoken';
 
 const router = new Router();
@@ -10,7 +9,7 @@ router.get('/user', (req, res) => {
   res.json({ user: req.user });
 });
 
-router.get('/polls', expressJwt({ secret: 'very secret key' }), (req, res) => {
+router.get('/polls', (req, res) => {
   const polls = [ { id: 1, title: 'Poll 1' }, { id: 2, title: 'Poll 2' } ];
 
   if (req.user) {
